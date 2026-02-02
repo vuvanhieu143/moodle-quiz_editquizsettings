@@ -34,7 +34,6 @@ require_once($CFG->dirroot . '/lib/formslib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class quiz_report_editquizsettings_form extends moodleform {
-
     /**
      * Define the form.
      */
@@ -43,26 +42,74 @@ class quiz_report_editquizsettings_form extends moodleform {
         $mform = $this->_form;
         $this->_form->updateAttributes(['id' => 'quiz_editquizsettings_form']);
 
-        $mform->addElement('header', 'heading', get_string('editquizsettings', 'quiz_editquizsettings'));
+        $mform->addElement(
+            'header',
+            'heading',
+            get_string('editquizsettings', 'quiz_editquizsettings')
+        );
 
-        $mform->addElement('static', 'quiznamestr',
-                            get_string('name', 'quiz_editquizsettings'),
-                            html_writer::tag('strong', $this->_customdata['quizname']));
-        $mform->addElement('static', 'idnumberstr',
-                            get_string('idnumber', 'quiz_editquizsettings'),
-                            html_writer::tag('strong', $this->_customdata['idnumber']));
+        $mform->addElement(
+            'static',
+            'quiznamestr',
+            get_string('name', 'quiz_editquizsettings'),
+            html_writer::tag(
+                'strong',
+                $this->_customdata['quizname']
+            )
+        );
+        $mform->addElement(
+            'static',
+            'idnumberstr',
+            get_string('idnumber', 'quiz_editquizsettings'),
+            html_writer::tag(
+                'strong',
+                $this->_customdata['idnumber']
+            )
+        );
 
-        $mform->addElement('header', 'timing', get_string('timing', 'quiz'));
+        $mform->addElement(
+            'header',
+            'timing',
+            get_string(
+                'timing',
+                'quiz'
+            )
+        );
 
         // Open and close dates.
-        $mform->addElement('date_time_selector', 'timeopen', get_string('quizopen', 'quiz'),
-            ['optional' => true, 'step' => 1]);
-        $mform->addHelpButton('timeopen', 'quizopenclose', 'quiz');
+        $mform->addElement(
+            'date_time_selector',
+            'timeopen',
+            get_string(
+                'quizopen',
+                'quiz'
+            ),
+            ['optional' => true, 'step' => 1]
+        );
+        $mform->addHelpButton(
+            'timeopen',
+            'quizopenclose',
+            'quiz'
+        );
 
-        $mform->addElement('date_time_selector', 'timeclose', get_string('quizclose', 'quiz'),
-            ['optional' => true, 'step' => 1]);
+        $mform->addElement(
+            'date_time_selector',
+            'timeclose',
+            get_string(
+                'quizclose',
+                'quiz'
+            ),
+            ['optional' => true, 'step' => 1]
+        );
 
-        $this->add_action_buttons(true, get_string('savechanges', 'quiz_editquizsettings'), false);
+        $this->add_action_buttons(
+            true,
+            get_string(
+                'savechanges',
+                'quiz_editquizsettings'
+            ),
+            false
+        );
     }
 
     #[\Override]
@@ -70,8 +117,10 @@ class quiz_report_editquizsettings_form extends moodleform {
         $errors = parent::validation($data, $files);
 
         // Check open and close times are consistent.
-        if ($data['timeopen'] != 0 && $data['timeclose'] != 0 &&
-                $data['timeclose'] < $data['timeopen']) {
+        if (
+            $data['timeopen'] != 0 && $data['timeclose'] != 0 &&
+            $data['timeclose'] < $data['timeopen']
+        ) {
             $errors['timeclose'] = get_string('closebeforeopen', 'quiz');
         }
         return $errors;

@@ -64,8 +64,11 @@ class quiz_editquizsettings_report extends report_base {
         $pageoptions['mode'] = 'editquizsettings';
         $reporturl = new moodle_url('/mod/quiz/report.php', $pageoptions);
 
-        $mform = new quiz_report_editquizsettings_form($reporturl,
-            ['quizname' => $quiz->name, 'idnumber' => $cm->idnumber], 'get');
+        $mform = new quiz_report_editquizsettings_form(
+            $reporturl,
+            ['quizname' => $quiz->name, 'idnumber' => $cm->idnumber],
+            'get'
+        );
 
         $data = new stdClass();
         foreach ($this->editablefields as $field) {
@@ -75,7 +78,6 @@ class quiz_editquizsettings_report extends report_base {
 
         if ($mform->is_cancelled()) {
             redirect(new moodle_url('/mod/quiz/view.php', ['id' => $cm->id]));
-
         } else if ($fromform = $mform->get_data()) {
             $loginfo = '';
             $modifiedquiz = new stdClass();
@@ -100,7 +102,8 @@ class quiz_editquizsettings_report extends report_base {
 
                 // Log quiz settings edit event.
                 $event = \quiz_editquizsettings\event\quiz_settings_edited::create(
-                    ['objectid' => $quiz->id, 'context' => context_module::instance($cm->id)]);
+                    ['objectid' => $quiz->id, 'context' => context_module::instance($cm->id)]
+                );
                 $event->set_loginfo($info);
                 $event->trigger();
 

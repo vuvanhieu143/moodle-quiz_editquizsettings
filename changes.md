@@ -1,6 +1,12 @@
 # Change log for the Edit quiz settings quiz report
 
+## Changes in 1.8
+
+* This version works with Moodle 5.1 and PHP 8.4.
+
+
 ## Changes in 1.7
+
 * This version works with Moodle 5.0.
 * Cherry-picked commits since february 2024 till now:
   * Log events remove all legacy logs methods.
@@ -8,9 +14,11 @@
   * Fix behat deprecated step failures.
 * Upgrade the CI to support Moodle 5.0 (PHP 8.3), and update the branch to support branch MOODLE_405_STABLE, and MOODLE_500_STABLE.
 
+
 ## Changes in 1.6
 
 * This version works with Moodle 4.0.
+
 
 ## Changes in 1.5
 

@@ -32,7 +32,6 @@
   * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
   */
 class quiz_settings_edited extends \core\event\base {
-
     /**
      * The log information.
      * @var string
@@ -58,8 +57,10 @@ class quiz_settings_edited extends \core\event\base {
 
     #[\Override]
     public function get_url() {
-        return new \moodle_url('/mod/quiz/report/editquizsettings/editquizsettings.php',
-            ['id' => $this->context->instanceid]);
+        return new \moodle_url(
+            '/mod/quiz/report/editquizsettings/editquizsettings.php',
+            ['id' => $this->context->instanceid]
+        );
     }
 
     /**
