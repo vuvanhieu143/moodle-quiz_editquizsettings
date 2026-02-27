@@ -34,7 +34,6 @@ require_once(__DIR__ . '/../../../../../../lib/behat/behat_base.php');
  * Step definitions related to quiz_editquizsettings.
  */
 class behat_quiz_editquizsettings extends behat_question_base {
-
     /**
      * Convert page names to URLs for steps like 'When I am on the "[identifier]" "[page type]" page'.
      *
@@ -49,8 +48,10 @@ class behat_quiz_editquizsettings extends behat_question_base {
     protected function resolve_page_instance_url(string $type, string $identifier): moodle_url {
         switch ($type) {
             case 'Report':
-                return new moodle_url('/mod/quiz/report.php',
-                        ['id' => $this->get_cm_by_quiz_name($identifier)->id, 'mode' => 'editquizsettings']);
+                return new moodle_url(
+                    '/mod/quiz/report.php',
+                    ['id' => $this->get_cm_by_quiz_name($identifier)->id, 'mode' => 'editquizsettings']
+                );
 
             default:
                 throw new Exception('Unrecognised quiz_editquizsettings page type "' . $type . '."');
@@ -78,5 +79,4 @@ class behat_quiz_editquizsettings extends behat_question_base {
         $quiz = $this->get_quiz_by_name($name);
         return get_coursemodule_from_instance('quiz', $quiz->id, $quiz->course);
     }
-
 }
